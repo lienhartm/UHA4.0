@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+
+        <style>
+
+
+/**/
+            header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 300px;
+                font-weight: bold;
+                letter-spacing: 2px;
+                font-size: 48px;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            nav > a {
+                text-decoration: none;
+            }
+
+            #main {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 500px;
+            }
+
+            #content {
+                position: relative;
+                top: 100px;
+                height: 500px;
+            }
+
+            #text {
+                display: block;
+            }
+
+            #image {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            #image > a {
+                text-decoration: none;
+            }
+
+            #courrier {
+                text-align: center;
+            }
+
+            footer {
+                height: 200px;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            Gâteau St Michel
+        </header>
+        <nav>
+            <a href="javascript:menu();">Menu</a>
+            <a href="javascript:rond();">Rond</a>
+            <a href="javascript:carre();">Carre</a>
+            <a href="javascript:triangle();">Triangle</a>
+            <a href="javascript:nous();">Nous</a>
+        </nav>
+        <main id="main">
+            
+            <div id="content">
+                <div id="text">
+                    <p>Parissier depuis 2000, je confectionne des gâteaux tout autant savoureux les uns que les autres.</p>
+                    <br>
+                    <p>Découvrez toutes nos gammes séduisante dans notre boutique.</p>
+                </div>
+                <div id="image">
+                    <a href="javascript:rond();" >#Rond<!--Forme ronde--></a>
+                    <a href="javascript:carre();">#Carre<!--Forme carre--></a>
+                    <a href="javascript:triangle();">#Triangle<!--Forme triangulaire--></a>
+                </div>
+                <br>
+                <div id="courrier">
+                    <p>
+                        <a href="javascript:nous();">Retrouvez notre boutique</a>
+                    </p>
+                </div>
+            </div>
+        
+        </main>
+        <footer>
+            FIL ROUGE 4.0.2 - PROJET MIND - LIENHART MICHAEL
+        </footer>
+    </body>
+</html>
+
+<script>
+
+//
+
+    const main = document.getElementById("main");
+
+    function menu() {
+
+        main.innerHTML = "<div id='content'>"
+                       + "<div id='text'>"
+                       + "<p>Parissier depuis 2000, je confectionne des gâteaux tout autant savoureux les uns que les autres.</p>"
+                       + "<br>"
+                       + "<p>Découvrez toutes nos gammes séduisante dans notre boutique.</p>"
+                       + "</div>"
+                       + "<div id='image'>"
+                       + "<a href='javascript:rond();'>#Rond<!--Forme ronde--></a>"
+                       + "<a href='javascript:carre();'>#Carre<!--Forme carre--></a>"
+                       + "<a href='javascript:triangle();'>#Triangle<!--Forme triangulaire--></a>"
+                       + "</div>"
+                       + "<br>"
+                       + "<div id='courrier'>"
+                       + "<p><a href='javascript:nous();'>Retrouvez notre boutique</a></p>"
+                       + "</div>"
+                       + "</div>";
+    
+    }
+
+    function rond() {
+
+        main.innerHTML = "<div id='content'>"
+                       + "<p>Les gâteaux ronds</p>"
+                       + "<br>"
+                       + "<div id='image'>"
+                       + "<a href='#'>#Rouge</a>"
+                       + "<a href='#'>#Vert</a>"
+                       + "<a href='#'>#Bleu</a>"
+                       + "<a href='#'>#Jaune</a>"
+                       + "</div>"
+                       + "</div>";
+    
+    }
+
+    function carre() {
+
+        main.innerHTML = "<div id='content'>"
+                       + "<p>Les gâteaux carrés</p>"
+                       + "<br>"
+                       + "<div id='image'>"
+                       + "<a href='#'>#Rouge</a>"
+                       + "<a href='#'>#Vert</a>"
+                       + "<a href='#'>#Bleu</a>"
+                       + "<a href='#'>#Jaune</a>"
+                       + "</div>"
+                       + "</div>";
+
+    }
+
+    function triangle() {
+
+        main.innerHTML = "<div id='content'>"
+                       + "<p>Les gâteaux triangles</p>"
+                       + "<br>"
+                       + "<div id='image'>"
+                       + "<a href='#'>#Rouge</a>"
+                       + "<a href='#'>#Vert</a>"
+                       + "<a href='#'>#Bleu</a>"
+                       + "<a href='#'>#Jaune</a>"
+                       + "</div>"
+                       + "</div>";
+
+    }
+
+    function nous() {
+
+        main.innerHTML = "<div id='content'>"
+                       + "<p>Venez avec le sourire</p>"
+                       + "<br>"
+                       + "<p>Adresse:</p>"
+                       + "<p>Les Gâteaux St Michel</p>"
+                       + "<p>25 route de la Drôme</p>"
+                       + "<p>68000 Provence</p>"
+                       + "<p>Tél:04.54.56.76.34</p>"
+                       + "<br>"
+                       + "<div id='courrier'>"
+                       + "<p>Nous sommes aussi joignable par mail</p>"
+                       + "<a href='mailto:'>E-courrier</a>"
+                       + "</div>"
+                       + "</div>";
+
+    }
+
+</script>
+
+<!--
+
+ROND
+
+    form rond rouge
+
+        https://www.boutique-petit.com/cdn/shop/files/entremets_rond_hauteur_45_realise_a_partir_de_moules_en_plastique_thermoforme_aa739de7-657e-466e-b89c-94845f8daee6.jpg?v=1690529743&width=1080
+
+    form rond vert
+
+        https://ae01.alicdn.com/kf/Hd3ee0cd62f1e407399054a977ec94d3cl/Moule-g-teau-rond-de-no-l-en-Silicone-avec-miroir-Mousse-et-lune-mat-riel.jpg
+
+    form rond bleu
+
+        https://st3.depositphotos.com/1019404/19366/v/600/depositphotos_193668280-stock-video-blue-cake-decorated-dried-pear.jpg
+
+    form rond jaune
+
+        https://img.freepik.com/photos-premium/gateau-jaune-couleur-isolee-dessert-glace-rond-delicieux-gateaux-ananas-dore-brillant-fond-blanc-illustration-generative-abstraite-ia_162695-9785.jpg
+
+CARRE
+
+    form carre rouge
+
+        https://m.media-amazon.com/images/I/517Ti8oZYRL._AC_UF1000,1000_QL80_.jpg
+
+    form carre vert
+
+        https://www.legateaudorefiesta.com/savefiles/articles/art_image1_20180724152606.jpg
+
+    form carre bleu
+
+        https://www.patisseriebelair.com/wp-content/uploads/2020/10/Gateau-creme-au-beurre-carre-bleu-1-1-scaled.jpg
+
+    form carre jaune
+
+        https://img.freepik.com/photos-premium/gateau-jaune-couleur-carre-dessert-glace-brillant-ananas-gateaux-abstrait-generative-ai-illustration_162695-7304.jpg
+
+TRIANGLE
+
+    form triangle rouge
+
+        https://epicerie.dispatche.com/wp-content/uploads/2022/09/triangle-tarte-perfore-bord-arrondi-2-main-800.png
+
+    form triangle vert
+
+        https://us.123rf.com/450wm/boon8studio/boon8studio1810/boon8studio181000106/109845546-g%C3%A2teau-au-th%C3%A9-vert-sur-plat-blanc-et-fond-noir.jpg?ver=6
+
+    form triangle bleu
+
+        https://www.mashed.com/img/gallery/a-little-food-coloring-goes-a-long-way-in-blue-velvet-cake/l-intro-1695736558.jpg
+
+    form triangle jaune
+
+        https://img.freepik.com/photos-premium/tranches-forme-triangle-morceau-gateau-orange-cuillere-bois-blanc_55716-3053.jpg
+
+-->

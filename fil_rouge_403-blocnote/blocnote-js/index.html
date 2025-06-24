@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+  <title>BlocNote</title>
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <script src="scripts.js" defer></script>
+
+  <meta charset="UTF-8" />
+  <meta name="description" content="BLOCNOTE" />
+  <meta name="keywords" content="Traitement de texte, Note" />
+  <meta name="author" content="LIENHART Michaël" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+  <header>
+    <!-- titre -->
+    <h1 id="titre">BLOCNOTE</h1>
+    <!-- button menu -->
+    <h1 id="btn-menu">&#x2756;</h1>
+  </header>
+
+  <main>
+
+    <!-- Pop-up pour inscription / connexion -->
+    <div id="popup-menu" class="popup hidden">
+      <div class="popup-content">
+        <h2>Bienvenue</h2>
+        <button id="btn-inscription">S'inscrire</button>
+        <button id="btn-connexion">Se connecter</button>
+        <!-- Boutons visibles uniquement lorsque l'utilisateur est connecté -->
+        <button id="btn-resetdb" class="hidden">Reset espace de stockage</button>
+        <button id="btn-modification" class="hidden">Modifier mes informations</button>
+        <button id="btn-suppression" class="hidden">Supprimer mon compte</button>
+        <button id="btn-deconnexion" class="hidden">Déconnexion</button>
+        <button id="btn-close">Fermer</button>
+      </div>
+    </div>
+
+    <!-- Pop-up pour le formulaire d'inscription -->
+    <div id="popup-inscription" class="popup hidden">
+      <div class="popup-content">
+        <h2>Inscription</h2>
+        <form id="inscription-form" onsubmit="inscriptionForm(event)">
+          <label for="nom">Nom:</label>
+          <input type="text" id="nom" name="nom" pattern="[A-Z][a-z]*" required
+            title="Le nom doit commencer par une majuscule" />
+          <label for="prenom">Prénom:</label>
+          <input type="text" id="prenom" name="prenom" pattern="[A-Z][a-z]*" required
+            title="Le prénom doit commencer par une majuscule" />
+          <label for="motdepasse-inscription">Mot de passe:</label>
+          <input type="text" id="motdepasse-inscription" name="motdepasse" pattern="[0-9]{10}" required
+            title="Le mot de passe doit être de dix chiffres" />
+          <button type="submit">S'inscrire</button>
+        </form>
+        <button id="btn-close-inscription">Fermer</button>
+      </div>
+    </div>
+
+    <!-- Pop-up pour le formulaire de connexion -->
+    <div id="popup-connexion" class="popup hidden">
+      <div class="popup-content">
+        <h2>Connexion</h2>
+        <form id="connexion-form" onsubmit="connexionForm(event)">
+          <label for="identifiant">Identifiant:</label>
+          <input type="text" id="identifiant" name="identifiant" pattern="[A-Za-z]*" required />
+          <label for="motdepasse-connexion">Mot de passe:</label>
+          <input type="text" id="motdepasse-connexion" name="motdepasse" pattern="[0-9]{10}" required />
+          <button type="submit">Se connecter</button>
+        </form>
+        <button id="btn-close-connexion">Fermer</button>
+      </div>
+    </div>
+
+    <!-- Pop-up pour la modification du profil utilisateur -->
+    <div id="popup-modification" class="popup hidden">
+      <div class="popup-content">
+        <h2>Modifier mon profil</h2>
+        <form id="edit-profile-form" onsubmit="modificationForm(event)">
+          <label for="edit-nom">Nom:</label>
+          <input type="text" id="modif-nom" name="nom" pattern="[A-Z][a-z]*" required
+            title="Le nom doit commencer par une majuscule" />
+          <label for="edit-prenom">Prénom:</label>
+          <input type="text" id="modif-prenom" name="prenom" pattern="[A-Z][a-z]*" required
+            title="Le prénom doit commencer par une majuscule" />
+          <label for="edit-motdepasse">Nouveau mot de passe:</label>
+          <input type="text" id="modif-motdepasse" pattern="[0-9]{10}" name="motdepasse" required
+            title="Le mot de passe doit contenir dix chiffres" />
+          <button type="submit">Sauvegarder</button>
+        </form>
+        <button id="btn-close-edit">Fermer</button>
+      </div>
+    </div>
+
+    <!-- Boutton de gestion de fichier -->
+    <div id="bloc">
+      <div id="visiteur">
+        <button id="btn-note" class="hidden">Notes</button>
+        <button id="btn-televerse">Téléverser un document</button>
+        <input type="file" id="fichier" style="display: none" accept=".txt" />
+        <button id="btn-save">Enregistrement Local</button>
+        <button id="btn-cloud" class="hidden">Enregistrement Cloud</button>
+        <button id="btn-efface">Effacer</button>
+      </div>
+    </div>
+
+    <br />
+
+    <!-- Champ pour le titre de la note -->
+    <p id="statusnote"></p>
+    <input type="text" id="titrenote" placeholder="Titre de la note" value="" />
+    <textarea id="commentaire" placeholder="Écrivez votre note ici..." rows="20" cols="100"></textarea>
+    <div id="char-count">
+      <p id="char-count-text">0 / 1024 caractères</p>
+    </div>
+
+    <!-- Fenêtre de liste des documents utilisateur -->
+    <div id="doc-popup" class="popup">
+      <div class="popup-content">
+        <h2>Mes Documents</h2>
+        <!-- Quantité totale de Ko -->
+        <p id="total-ko"></p>
+        <!-- Liste des notes -->
+        <ul id="note-list"></ul>
+        <button id="close-popup">Fermer</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- footer -->
+  <footer>
+    <h6>UHA 4.0 - FIL ROUGE 4.0.3 - BlocNote - LIENHART Michaël</h6>
+  </footer>
+</body>
+
+</html>

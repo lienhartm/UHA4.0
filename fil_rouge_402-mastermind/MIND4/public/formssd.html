@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <div id="mind"></div>
+
+    <div style="position:absolute; bottom: 120px; left:40%;">
+        <div id="affichage" style="width: 200px;height: 30px;text-align: center;margin-bottom: 10px;"></div>
+        <button onclick="ajouterChiffre(1)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;">●</button>
+        <button onclick="ajouterChiffre(2)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;">●</button>
+        <button onclick="ajouterChiffre(3)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;">●</button><br>
+        <button onclick="ajouterChiffre(4)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;">■</button>
+        <button onclick="ajouterChiffre(5)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;">■</button>
+        <button onclick="ajouterChiffre(6)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;">■</button><br>
+        <button onclick="ajouterChiffre(7)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;">▲</button>
+        <button onclick="ajouterChiffre(8)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;">▲</button>
+        <button onclick="ajouterChiffre(9)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;">▲</button><br>
+        <button id="reset" onclick="reset()" style="width: 100px;height: 60px;margin: 5px;font-size: 20px;background-color:red;color:white;">Reset</button>
+        <button id="valider" onclick="valider()" style="width: 100px;height: 60px;margin: 5px;font-size: 20px;background-color: green;color: white;">Valider</button>
+        <button id="retour" onclick="retour()" style="width: 100px;height: 60px;margin: 5px;font-size: 20px;background-color: yellow;color: white;">Retour</button>
+    </div>
+    
+</body>
+</html>
+
+<script>
+	  
+    
+    var code = '';
+    var affichageDiv = document.getElementById('affichage');
+
+    function ajouterChiffre(chiffre) {
+        if (code.length < 4) {
+            code += chiffre;
+            affichageDiv.innerHTML += getSymbole(chiffre);
+        }
+    }
+
+    function retour() {
+
+        window.location.href = '../index.html';
+
+    }
+
+    function reset() {
+        code = '';
+        affichageDiv.innerHTML = '';
+    }
+
+    function valider() {
+        if (code.length === 4) {
+
+            const myHeaders = new Headers();
+
+            const formdata = new FormData();
+            formdata.append("nb1", code[0]);
+            formdata.append("nb2", code[1]);
+            formdata.append("nb3", code[2]);
+            formdata.append("nb4", code[3]);
+
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: formdata,
+                redirect: "follow"
+            };
+
+            fetch("http://localhost:8080/gamessd", requestOptions)
+                .then((response) => response.json())
+                .then((data) => {
+                    document.getElementById('mind').innerText = JSON.stringify(data);
+                })
+                .catch((error) => console.error(error));
+
+        }
+        get();
+    }
+
+    function getSymbole(chiffre) {
+        switch (chiffre) {
+            case 1:
+                return '<span style="font-size: 30px;color:red;">●</span>';
+            case 2:
+                return '<span style="font-size: 30px;color:green;">●</span>';
+            case 3:
+                return '<span style="font-size: 30px;color:blue;">●</span>';
+            case 4:
+                return '<span style="font-size: 30px;color:red;">■</span>';
+            case 5:
+                return '<span style="font-size: 30px;color:green;">■</span>';
+            case 6:
+                return '<span style="font-size: 30px;color:blue;">■</span>';
+            case 7:
+                return '<span style="font-size: 30px;color:red;">▲</span>';
+            case 8:
+                return '<span style="font-size: 30px;color:green;">▲</span>';
+            case 9:
+                return '<span style="font-size: 30px;color:blue;">▲</span>';
+            default:
+                return '';
+        }
+    }
+
+    function get() {
+
+        var text = '';
+
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+
+        fetch("http://localhost:8080/games", requestOptions)
+        .then((response) => response.json())
+        .then(respoanse => {
+            let text = '<div>';
+            response.forEach(coup => {
+                text += `<p><span>${coup.joueurCode}</span><span>${coup.correction}</span></p>`;
+            });
+            text += '</div>';
+            document.getElementById('mind').innerHTML = text;
+            console.log(text);
+        })
+        .catch((error) => console.error(error));
+
+    }
+
+</script>

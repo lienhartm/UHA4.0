@@ -1,0 +1,148 @@
+/* style.css */
+/**/
+/* header */
+/**/
+header {
+    font-size: 48px;
+    padding: 50px 100px 5px 50px;
+    background-color: #333;
+    color: #fff;
+    }
+/**/
+/* title */
+/**/
+.titre_animation {
+    background-color: chocolate;
+    font-weight: 600;
+    width: 600px;
+    padding: 10px;
+    border-radius: 15px 50px 50px 15px;
+    font-size: 76px;
+    text-align: left;
+    animation: titre_animation;
+    animation-fill-mode: forwards;
+    animation-duration: 5s;
+    }
+@keyframes titre_animation {
+        from {width:600px;}
+        to {width:1600px;}
+    }
+.titre_animation::after {
+    content: "\1F3C0";
+    vertical-align: sup;
+    animation: ball;
+    animation-fill-mode: forwards;
+    animation-duration: 10s;
+    position: relative;
+    font-size: 76px;
+}
+@keyframes ball {
+    from {left:0px;}
+    to {left:1000px;}
+}
+i.fa-basketball-ball {
+    font-size:200px;
+    background-color:black;
+    color: chocolate;
+    border-radius:100px 100px 100px 100px;
+    vertical-align: text-bottom;
+    z-index: -1;
+    }
+@keyframes ball {
+    from {left:0px;}
+    to {left:1000px;}
+}
+/**/
+/* navigation */
+/**/
+nav {
+    font-size: 24px;
+    padding: 10px 10px 10px 10px;
+    background-color: #333;
+    display: flex;
+    flex-direction: row;
+    }
+.nav {
+    text-decoration: none;
+    padding: 10px 10px 10px 10px;
+    color: #fff;
+    border: 5px solid #333;
+    }
+.nav:hover {
+    border-bottom: 5px solid #fff;
+    }
+/**/
+/* main */
+/**/
+main {
+    min-height:360px;
+    display: flex;
+    flex-direction: row;
+}
+/**/
+/* footer */
+/**/
+footer {
+    margin-top: 50px;
+    text-align: center;
+    padding: 50px 100px 50px 50px;
+    margin-top: 50px;
+    background-color: #333;
+    color: #fff;
+    }
+.footer {
+    color: #fff;
+}
+.footer:hover {
+    text-decoration: underline;
+}
+.info-line {
+    margin-top: 10px;
+}
+.info {
+    color:gray;
+    }
+.info:hover {
+    color:gray;
+    background-color: #333;
+    text-decoration: underline;
+    }
+/**/
+/* page index */
+/**/
+.page_index {
+    text-align: center;
+    width: 500px;
+    border-radius: 15px 50px;
+    padding: 50px;
+    background-color: rgba(255, 0, 0, 30%);
+    }
+.index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    flex-direction: column;
+    }
+/**/
+/* table */
+/**/
+table {
+    margin: 50px;
+}
+table, th, tr, td {
+    border: 1px solid black;
+}
+/**/
+/* form */
+/**/
+section.add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section.update {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

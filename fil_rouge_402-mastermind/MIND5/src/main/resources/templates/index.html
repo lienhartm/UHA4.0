@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>MIND</title>
+	    <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
+	    <script th:src="@{/js/script.js}"></script>
+	</head>
+	<body>
+	
+		<!-- 
+		<p th:text="${#ctx.session.sessionId}"></p>
+		<p th:text="${#ctx.session.codeComputer}"></p>
+		<p th:text="${#ctx.session.listGameData}"></p>
+		<br>
+		 -->
+
+		<div style="display: flex; flex-direction: row; justify-content:center; ">
+            <a th:href="@{/gamessd}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Jouer sans doublons</a>
+            <a th:href="@{/gamesad}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Jouer avec doublons</a>
+            <a th:href="@{/regle}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Règle du jeu</a>
+            <a th:href="@{/score}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Meilleur scores</a>
+        </div>
+        <div th:style="'display: flex;justify-content:center;align-items:center;'">
+        	<pre th:style="'letter-spacing:4px;line-height:20px;margin-top:200px;'">
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
+'""'''''''''''''''''''''''''''''''''''''''''''''''''''''''''""'
+'""'                                                       '""'
+'""'    """"    """"   """""    """      """  """"""""     '""'
+'""'    '"''    ''"'   ''"''    '"'      '"'  '"'   '"'    '""'
+'""'    '"' '  ' '"'    '"'     '"''     '"'  '"'    '"'   '""'
+'""'    '"' '  ' '"'    '"'     '"' '    '"'  '"'     '"'  '""'
+'""'    '"'  ''  '"'    '"'     '"'  '   '"'  '"'     '"'  '""'
+'""'    '"'  ''  '"'    '"'     '"'   '  '"'  '"'     '"'  '""'
+'""'    '"'      '"'    '"'     '"'    ' '"'  '"'     '"'  '""'
+'""'    '"'      '"'    '"'     '"'     ''"'  '"'    '"'   '""'
+'""'    '"'      '"'   ''"''    '"'      '"'  '"'   '"'    '""'
+'""'    """      """   """""    """      """  """"""""     '""'
+'""'                                          MASTERMIND   '""'
+'""'''''''''''''''''''''''''''''''''''''''''''''''''''''''''""'
+'"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        	</pre>
+		</div>
+      	<h6 th:style="'text-align:center;'">LM LIENHART MICHAEL - UHA 4.2 - PROJECT MIND</h6>
+	</body>
+</html>
+

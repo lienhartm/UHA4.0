@@ -1,0 +1,16 @@
+.:
+couleurs.php
+dao.php
+details.php
+equipes.php
+file.php
+footer.php
+header.php
+index.php
+joueurs.php
+lists.php
+readme.txt
+style
+
+./style:
+style.css

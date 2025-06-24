@@ -1,0 +1,20 @@
+services:
+  client:
+    build: ./blocnote-client
+    image: lienhartm/blocnote-react_client:latest
+    container_name: lienhartm-blocnote.react.client
+    env_file:
+      - .env
+    ports:
+      - "${PORT_CLIENT}:3000"
+    depends_on:
+      - server
+
+  server:
+    build: ./blocnote-server
+    image: lienhartm/blocnote-react_server:latest
+    container_name: lienhartm-blocnote.react.server
+    env_file:
+      - .env
+    ports:
+      - "${PORT_SERVER}:4000"

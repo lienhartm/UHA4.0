@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Mind</title>
+		<link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
+	    <script th:src="@{/js/script.js}"></script>
+	</head>
+	<body>
+
+		<div th:style="'display: flex; flex-direction: row; justify-content:center;'">
+            <a th:href="@{/gamessd}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer sans doublons</a>
+            <a th:href="@{/gamesad}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer avec doublons</a>
+            <a th:href="@{/regle}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Règle du jeu</a>
+            <a th:href="@{/score}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Meilleur scores</a>
+        </div>
+		<br>
+		<h1 th:style="'text-align:center;'">MIND</h1>
+		<div th:style="'display:flex;justify-content:center;'">
+			<div th:style="'display:flex;justify-content:center;flex-direction:column;'">
+				<h2>Règles du jeu</h2>
+				<h3>MIND est un jeu dérivée du MASTERMIND</h3>
+				<br />
+				<div th:style="'width:700px;'">
+					<h3>Le but est de découvrir la combinaison de formes colorées cachée par l'ordinateur. Pour cela, vous devez faire plusieurs essais pour choisir au fur et à mesure les bonnes formes colorées et enfin trouver leur place. L'ordinateur vous donnera des indices pour savoir si vous mettez les bonnes formes colorées et si elles sont à la bonne place.</h3>
+					<br>
+					<ul>
+						<li>
+							<span th:style="'color: red;'"> ◆ </span>
+							 - Dans la combinaison et à la bonne place
+						</li>
+						<li>
+							<span th:style="'color: black;'"> ◆ </span>
+							 - Dans la combinaison mais pas à la bonne place
+						</li>
+						<li>
+							<span th:style="'color: gray;'"> ◆ </span>
+							 - Pas dans la combinaison
+						</li>
+					</ul>
+					<br>
+					<h3>Vous serez peu être l'heureux qui vera sa meilleur partie affichée dans le tableau de la meilleur partie, pour cela trouvez la combianison en un minimum de coup et de temps.</h3>
+					<br>
+					<h2 th:style="'text-align:center;'">Bonne Partie !</h2>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

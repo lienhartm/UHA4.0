@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<body>
+	
+</body>
+</html>
+<script>
+
+
+	function retour() {
+
+		window.location.href = '../index.html';
+
+	}
+	
+/*
+	const requestOptions = {
+	  method: "GET",
+	  redirect: "follow"
+	};
+
+	fetch("http://localhost:8080/game", requestOptions)
+	  .then((response) => response.text())
+	  .then((result) => console.log(result))
+	  .catch((error) => console.error(error));
+*/
+	    const http = require('http');
+
+		const options = {
+		method: 'GET',
+		hostname: 'localhost',
+		port: 8080,
+		path: '/game',
+		};
+
+		const req = http.request(options, (res) => {
+		let data = '';
+
+		res.on('data', (chunk) => {
+			data += chunk;
+		});
+
+		res.on('end', () => {
+			console.log(data);
+		});
+		});
+
+		req.on('error', (error) => {
+		console.error(error);
+		});
+
+		req.end();
+
+</script>

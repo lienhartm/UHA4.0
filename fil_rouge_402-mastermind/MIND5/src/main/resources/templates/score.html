@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Mind</title>
+	    <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
+    	<script th:src="@{/js/script.js}"></script>	
+	</head>
+	<body>
+	
+		<div th:style="'display: flex; flex-direction: row; justify-content:center;'">
+            <a th:href="@{/gamessd}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer sans doublons</a>
+            <a th:href="@{/gamesad}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer avec doublons</a>
+            <a th:href="@{/regle}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Règle du jeu</a>
+            <a th:href="@{/score}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Meilleur scores</a>
+        </div>
+		
+		<br>
+		<h1 th:style="'text-align:center;'">MIND</h1>
+			<div th:style="'display:flex;justify-content:center;'">
+				<div th:style="'display:flex;justify-content:center;flex-direction:column;'">
+					<h2 th:style="'text-align:center;'">MEILLEURS SCORE</h2>
+	    			<br>
+	    			<div th:style="'position:absolute;top:20%; left:30%;'">
+		    			<br>
+		    			<h3 th:style="'text-align:center;'">Meilleur Partie</h3>
+		    			<br>
+		    			<p>Meilleurs Temps : <span th:text="${time}"></span></p>
+		    			<br>
+		    			<p>Nombre de Tour : <span th:text="${tour}"></span></p>
+		    			<br>
+		    			<p>Nombre de Point : <span th:text="${point}"></span></p>
+		    			<br>
+		    			<h3 th:style="'text-align:center;'">Score de jeu</h3>
+		    			<br>
+		    			<p>Temps de jeu : <span th:text="${btime}"></span></p>
+		    			<br>
+		    			<p>Points accumulés : <span th:text="${bpoint}"></span></p>
+		    		</div>
+		    	</div>
+	    	</div>		 			
+	</body>
+</html>

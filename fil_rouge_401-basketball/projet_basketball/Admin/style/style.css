@@ -1,0 +1,122 @@
+/* style.css */
+/**/
+/* header */
+/**/
+header {
+    font-size: 48px;
+    padding: 50px 100px 5px 50px;
+    background-color: #333;
+    color: #fff;
+    }
+/**/
+/* title */
+/**/
+.titre {
+    background-color: chocolate;
+    font-weight: 600;
+    width: 1600px;
+    padding: 10px;
+    border-radius: 15px 50px 50px 15px;
+    font-size: 76px;
+    text-align: left;
+}
+.titre_animation {
+    background-color: chocolate;
+    font-weight: 600;
+    width: 600px;
+    padding: 10px;
+    border-radius: 15px 50px 50px 15px;
+    font-size: 76px;
+    text-align: left;
+    animation: titre_animation;
+    animation-fill-mode: forwards;
+    animation-duration: 5s;
+    }
+@keyframes titre_animation {
+        from {width:600px;}
+        to {width:1600px;}
+    }
+.titre_animation::after {
+    content: "\1F3C0";
+    vertical-align: sup;
+    animation: ball;
+    animation-fill-mode: forwards;
+    animation-duration: 10s;
+    position: relative;
+    font-size: 76px;
+}
+@keyframes ball {
+    from {left:0px;}
+    to {left:1000px;}
+}
+i.fa-basketball-ball {
+    font-size:200px;
+    background-color:black;
+    color: chocolate;
+    border-radius:100px 100px 100px 100px;
+    vertical-align: text-bottom;
+    z-index: -1;
+    }
+/**/
+/* navigation */
+/**/
+nav {
+    font-size: 24px;
+    padding: 10px 10px 10px 10px;
+    background-color: #333;
+    }
+.nav {
+    text-decoration: none;
+    padding: 10px 10px 10px 10px;
+    color: #fff;
+    border: 5px solid #333;
+    }
+.nav:hover {
+    border-bottom: 5px solid #fff;
+    }
+/**/
+/* footer */
+/**/
+footer {
+    text-align: center;
+    padding: 50px 100px 50px 50px;
+    margin-top: -5px;
+    background-color: #333;
+    color: #fff;
+    }
+.footer {
+    color: #fff;
+}
+.footer:hover {
+    text-decoration: underline;
+}
+.info-line {
+    margin-top: 100px;
+}
+.info {
+    color:gray;
+    }
+.info:hover {
+    color:gray;
+    background-color: #333;
+    text-decoration: underline;
+    }
+.admin{
+    float: right;
+    color:#fff;
+    position: absolute;
+    right: 35px;
+    top: 0px;
+    font-size: 25px;
+    font-weight: 600;
+}
+.admin:after {
+    color: #fff;
+}
+.admin:hover {
+    color: #fff;
+}
+form {
+    text-align: center;
+    padding: 100px;
+}

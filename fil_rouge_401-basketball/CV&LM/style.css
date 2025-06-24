@@ -1,0 +1,108 @@
+/* style.css */
+/**/
+/* HEADER */
+/**/
+header {
+    background-color: #7FFFD4;
+    padding: 20px;
+}
+figure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    vertical-align:bottom;
+}
+figcaption {
+    font-size: 78px;
+    margin-top: 50px;
+    padding-left: 50px;
+    font-weight: 900;
+}
+nav {
+    font-size: 24px;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    display: inline-block;
+    margin-inline: 25px;
+    color: #000;
+}
+/**/
+/* MAIN */
+/**/
+main {
+    background-color: #7FFFD4;
+}
+/**/
+/* FOOTER */
+/**/
+footer {
+    background-color: #7FFFD4;
+    text-align: center;
+    padding: 25px;
+}
+/**/
+/* HOME */
+/**/
+section.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/**/
+/* RESEARCH */
+/**/
+section.research {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/**/
+/* CV */
+/**/
+section.cv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px 0px 50px 0px;
+}
+/**/
+/* PROJECT */
+/**/
+section.projet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/**/
+/* CONTACT */
+/**/
+section.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form {
+    padding: 50px;
+}
+input {
+    margin: 10px 0px 10px 25px;
+}
+textarea {
+    margin-left: 25px;
+    margin-top: 10px;
+}
+.center {
+    margin: 25px 0px 0px 75px;
+    
+}

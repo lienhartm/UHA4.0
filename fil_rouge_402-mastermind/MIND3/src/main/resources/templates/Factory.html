@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>BonBon Factory</title>
+<script type="text/javascript" th:inline="javascript">
+    var contextPath = /*[[@{/}]]*/ '';
+</script>
+</head>
+<body>
+	<h1>The form package calculator factory</h1>
+	<br />
+	<p>Confectionner votre boite de chocolat de quatre pièces de votre choix</p>
+	<p>Forme du gâteau :</p>
+	<ul>
+		<li>Rond d'un rayon de 10cm</li>
+		<li>Carré de côté 10cm</li>
+		<li>Triangulaire de côté de 10cm</li>
+	</ul>
+	<p>Parfum disponible :</p>
+	<ul>
+		<li>Rouge : parfum fraise</li>
+		<li>Vert : parfum pistache</li>
+		<li>Bleu : parfum prune</li>
+	</ul>
+	<br />
+    <p style="text-decoration:underline;font-weight:bold;">Composition de votre choix</p>
+	<form action="/app/formes" method="post" name="code">
+		<select name="nb1" required>
+			<option></option>
+			<option th:value="'1'">Rond rouge</option>
+			<option th:value="'2'">Rond bleu</option>
+			<option th:value="'3'">Rond vert</option>
+			<option th:value="'4'">Carre rouge</option>
+			<option th:value="'5'">Carre bleu</option>
+			<option th:value="'6'">Carre vert</option>
+			<option th:value="'7'">Triangle rouge</option>
+			<option th:value="'8'">Triangle bleu</option>
+			<option th:value="'9'">Triangle vert</option>
+		</select>
+		<select name="nb2" required>
+			<option></option>
+			<option th:value="'1'">Rond rouge</option>
+			<option th:value="'2'">Rond bleu</option>
+			<option th:value="'3'">Rond vert</option>
+			<option th:value="'4'">Carre rouge</option>
+			<option th:value="'5'">Carre bleu</option>
+			<option th:value="'6'">Carre vert</option>
+			<option th:value="'7'">Triangle rouge</option>
+			<option th:value="'8'">Triangle bleu</option>
+			<option th:value="'9'">Triangle vert</option>
+		</select>
+		<select name="nb3" required>
+			<option></option>
+			<option th:value="'1'">Rond rouge</option>
+			<option th:value="'2'">Rond bleu</option>
+			<option th:value="'3'">Rond vert</option>
+			<option th:value="'4'">Carre rouge</option>
+			<option th:value="'5'">Carre bleu</option>
+			<option th:value="'6'">Carre vert</option>
+			<option th:value="'7'">Triangle rouge</option>
+			<option th:value="'8'">Triangle bleu</option>
+			<option th:value="'9'">Triangle vert</option>
+		</select>
+		<select name="nb4" required>
+			<option></option>
+			<option th:value="'1'">Rond rouge</option>
+			<option th:value="'2'">Rond bleu</option>
+			<option th:value="'3'">Rond vert</option>
+			<option th:value="'4'">Carre rouge</option>
+			<option th:value="'5'">Carre bleu</option>
+			<option th:value="'6'">Carre vert</option>
+			<option th:value="'7'">Triangle rouge</option>
+			<option th:value="'8'">Triangle bleu</option>
+			<option th:value="'9'">Triangle vert</option>
+		</select>
+		<input type="submit" value="envoyer">
+	</form>
+	<p style="text-decoration:underline;font-weight:bold;">Choisisser une composition aléatoire : </p>
+	<form action="/app/code/generateur" method="get" name="code">
+		<input type="submit" value="Combinaison aléatoire">
+	</form>
+	 <br />
+	 <p style="text-decoration:underline;font-weight:bold;">Factory</p>
+	 	<p>Nombre de boites vendu : <span id="nbCode"></span> - <abbr title="Superficie Total (cm)">Pesé de la Production (grammes)</abbr> : <span id="totalSuperficie"></span> - <abbr title="Périmètre Total (cm)">Chiffre d'affaire(€)</abbr> : <span id="totalPerimetre"></span></p>
+	 	<p id="percent"></p>
+	 <br />
+	 <p style="text-decoration:underline;font-weight:bold;">Boite confectionné :</p>
+		<div id="codeById"></div>
+   	 <br />
+	 <p style="text-decoration:underline;font-weight:bold;">Production total :</p>
+		<div id="codeAll"></div>
+		
+</body>
+</html>
+
+<script type="text/javascript" th:inline="javascript">
+
+function affiche() {
+	const requestOptions = {
+	  method: "GET",
+	  redirect: "follow"
+	};
+	
+	fetch("http://localhost:8080/app/code", requestOptions)
+	  .then((response) => response.text())
+	  .then((result) =>  {
+		  document.getElementById('codeAll').innerHTML = result;
+	  })
+	  .catch((error) => console.error(error));
+	
+	fetch("http://localhost:8080/app/code", requestOptions)
+	  .then((response) => response.json())
+	  .then((result) => {
+		  document.getElementById('nbCode').innerHTML = result.length;
+	  })
+	  .catch((error) => console.error(error));
+	  
+	fetch("http://localhost:8080/app/code", requestOptions)
+	.then((response) => response.json())
+	.then((result) =>  {
+		  	let affichage = "";
+		  	geometrie = "";
+		  	couleur = "";
+		  	let totalSuperficie = 0;
+		  	let totalPerimetre = 0;
+		  	formTotal = 0;
+		  	//couleur
+		  	formR = 0;
+		  	formG = 0;
+		  	formB = 0;
+		  	//form
+		  	formRond = 0;
+		  	formCarre = 0;
+		  	formTriangle = 0;
+		  	//gateau
+		  	formRondRouge = 0;
+		  	formRondGreen = 0;
+		  	formRondBlue = 0;
+		  	formCarreRouge = 0;
+		  	formCarreGreen = 0;
+		  	formCarreBlue = 0;
+		  	formTriangleRouge = 0;
+		  	formTriangleGreen = 0;
+		  	formTriangleBlue = 0;
+			for(let combinaison of result) {
+				superficie = 0;
+				perimetre = 0;
+			  	pieces = "";
+			  	couleur = "";
+			  	geometrie = "";
+			  	rouge = 50;
+			  	vert = 50;
+			  	bleu = 50;
+			  	rgb = "";
+			  	boite = "";
+			  	resultatCouleur = "";
+			  	
+				affichage += "<div>";
+				for(let code of combinaison['forms']) {
+					formTotal++;
+					if (code.couleur == 0) {
+						boite  += "<span style='color:red;'>"
+						rouge += 50;
+					}
+					else if (code.couleur == 1) {
+						boite  += "<span style='color:green;'>"
+						vert += 50;
+					}
+					else if (code.couleur == 2) {
+						boite  += "<span style='color:blue;'>"
+						bleu += 50;
+					}
+					if (code.geometrie == 1) {
+						boite += '●';
+						totalPerimetre += Math.round(2 * 3.14 * code.rayon);
+						totalSuperficie += Math.round(3.14 * (code.rayon*code.rayon));
+						perimetre += Math.round(2 * 3.14 * code.rayon);
+						superficie += Math.round(3.14 * (code.rayon*code.rayon));
+					}
+					else if (code.geometrie == 4) {
+						boite += '■';
+						totalPerimetre += (code.longueur*2) + (code.largeur*2);
+						totalSuperficie += code.longueur * code.largeur;
+						perimetre += (code.longueur*2) + (code.largeur*2);
+						superficie += code.longueur * code.largeur;
+					}
+					else if (code.geometrie == 7) {
+						boite += '▲';
+						totalPerimetre += Math.round(code.coteAB + code.coteBC + code.coteCA);
+						totalSuperficie += Math.round(Math.sqrt((totalPerimetre/2)*((totalPerimetre/2)-code.coteAB)*((totalPerimetre/2)-code.coteBC)*((totalPerimetre/2)-code.coteCA)));
+						perimetre += Math.round(code.coteAB + code.coteBC + code.coteCA);
+						superficie += Math.round(Math.sqrt((perimetre/2)*((perimetre/2)-code.coteAB)*((perimetre/2)-code.coteBC)*((perimetre/2)-code.coteCA)));
+					}
+					switch(code.couleur+code.geometrie) {
+						case 1:
+							formRondRouge++;
+							formRond++;
+							formR++;
+							break;
+						case 2:
+							formRondGreen++;
+							formRond++;
+							formG++;
+							break;
+						case 3:
+							formRondBlue++;
+							formRond++;
+							formB++;
+							break;
+						case 4:
+							formCarreRouge++;
+							formCarre++;
+							formR++;
+							break;
+						case 5:
+							formCarreGreen++;
+							formCarre++;
+							formG++;
+							break;
+						case 6:
+							formCarreBlue++;
+							formCarre++;
+							formB++;
+							break;
+						case 7:
+							formTriangleRouge++;
+							formTriangle++;
+							formR++;
+							break;
+						case 8:
+							formTriangleGreen++;
+							formTriangle++;
+							formG++;
+							break;
+						case 9:
+							formTriangleBlue++;
+							formTriangle++;
+							formB++;
+							break;
+					}
+
+					onePercent = 100 / formTotal;
+					
+					boite += "</span>";
+					pieces += `<span>${code.couleur+code.geometrie}</span>`;
+     				couleur += `<span>${code.couleur}</span>`;
+     				geometrie += `<span>${code.geometrie}</span>`;
+
+				}
+				
+				percent = `<span style="background-color:red;padding:0px 10px 0px 10px;"></span> ${Math.trunc(formR*onePercent)}% <span style="background-color:green;padding:0px 10px 0px 10px;"></span> ${Math.trunc(formG*onePercent)}% <span style="background-color:blue;padding:0px 10px 0px 10px;"></span> ${Math.trunc(formB*onePercent)}% <span>●</span> ${Math.trunc(formRond*onePercent)}% <span>■</span> ${Math.trunc(formCarre*onePercent)}% <span>▲</span> ${Math.trunc(formTriangle*onePercent)}% <span style="color:red;">●</span> ${Math.trunc(formRondRouge*onePercent)}% <span style="color:green;">●</span> ${Math.trunc(formRondGreen*onePercent)}% <span style="color:blue;">●</span> ${Math.trunc(formRondBlue*onePercent)}% <span style="color:red;">■</span> ${Math.trunc(formCarreRouge*onePercent)}% <span style="color:green;">■</span> ${Math.trunc(formCarreGreen*onePercent)}% <span style="color:blue;">■</span> ${Math.trunc(formCarreBlue*onePercent)}% <span style="color:red;">▲</span> ${Math.trunc(formTriangleRouge*onePercent)}% <span style="color:green;">▲</span> ${Math.trunc(formTriangleGreen*onePercent)}% <span style="color:blue;">▲</span> ${Math.trunc(formTriangleBlue*onePercent)}% `;
+ 				rgb += rouge + ", " + vert + ", " + bleu;
+ 				resultatCouleur += "<span style='background-color:rgb(" + rgb + ");padding:5px 15px 5px 15px;'></span>";
+				affichage += `<p>Code pièces : ${pieces} - Code couleur : ${couleur} - Code forme : ${geometrie} - <abbr title="superficie total">Poids(grammes)</abbr> : ${superficie} - <abbr title="Périmètre total">Prix(€)</abbr> : ${perimetre} - Couleur de la boite : ${resultatCouleur}  - Gâteau : ${boite}
+</div>`;
+
+			}
+			
+			document.getElementById('codeById').innerHTML = affichage;
+			document.getElementById('totalSuperficie').innerHTML = totalSuperficie;
+			document.getElementById('totalPerimetre').innerHTML = totalPerimetre;
+			document.getElementById('percent').innerHTML = percent;
+	})
+	.catch((error) => console.error(error));
+}
+
+affiche();
+
+</script>

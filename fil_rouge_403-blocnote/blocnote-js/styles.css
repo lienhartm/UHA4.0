@@ -1,0 +1,157 @@
+/* styles.css */
+/* tag */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+footer {
+  background-color: #87ceeb;
+  padding: 10px;
+  text-align: center;
+}
+
+footer h6 {
+  color: black;
+  margin: 0;
+}
+
+main {
+  height: 665px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus,
+input:focus {
+  outline: 2px solid #0056b3;
+  outline-offset: 2px;
+}
+
+input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+header {
+  background-color: #87ceeb; /* Bleu ciel */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-size: 24px;
+}
+
+/* class */
+.hidden {
+  display: none;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content, div#visiteur.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+div#visiteur.popup-content > button {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+}
+
+.popup-content button {
+  margin: 5px;
+  padding: 10px 20px;
+}
+
+/* id */
+#bloc {
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+#edit-profile-popup .popup-content {
+  width: 300px;
+  padding: 20px;
+}
+
+#titre,
+#commentaire {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#commentaire {
+  height: 200px;
+}
+
+#note,
+#televerse,
+#btn-save {
+  margin: 5px;
+  padding: 10px;
+}
+
+#titre {
+  margin: 0 auto;
+  text-align: center;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+#btn-menu  {
+  font-size: 4rem;
+  cursor: pointer;
+  margin: 50px;
+}
+
+#char-count, #char-count-text {
+  text-align: center;
+}
+
+#statusnote {
+  text-align: center;
+}
+
+/* media query for mobile device */

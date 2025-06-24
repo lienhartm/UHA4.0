@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Mind</title>
+		<link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
+	    <script th:src="@{/js/script.js}"></script>
+	</head>
+	<body>
+
+		<div th:style="'display: flex; flex-direction: row; justify-content:center;'">
+	           <a th:href="@{/gamessd}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer sans doublons</a>
+	           <a th:href="@{/gamesad}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer avec doublons</a>
+	           <a th:href="@{/regle}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Règle du jeu</a>
+	           <a th:href="@{/score}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Meilleur scores</a>
+	    </div>
+	       
+	    <br>
+	       
+        <div th:style="'position:relative;top:200px;font-size:48px;font-weight:bold;text-align:center;'">
+	  		<h2 style="text-align:center;">YOU LOOSE!</h2>
+	       	<h3><a th:href="@{/}" style="text-decoration:none;background:brown;color:white;padding:10px;border-radius:10px;">Try again!</a></h3>
+        </div>
+	       
+	</body>
+</html>

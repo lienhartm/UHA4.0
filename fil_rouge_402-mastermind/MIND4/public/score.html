@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scoreboard</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* Centrer horizontalement */
+            align-items: center; /* Centrer verticalement */
+            height: 100vh; /* 100% de la hauteur de la fenêtre */
+            margin: 0; /* Supprimer les marges par défaut */
+        }
+        #score {
+            text-align: center; /* Centrer le texte horizontalement */
+        }
+        #retour {
+            width: 100px;
+            height: 60px;
+            margin: 5px;
+            font-size: 20px;
+            background-color: green;
+            color: white;
+            position: fixed; /* Positionnement fixe */
+            bottom: 0; /* En bas */
+            left: 50%; /* À mi-chemin horizontalement */
+            transform: translateX(-50%); /* Déplacer de moitié de la largeur du bouton vers la gauche */
+        }
+    </style>
+</head>
+<body onload="getScores()">
+
+    <div id="score">
+        <h2>Meilleur Score :</h2>
+        <p>Nombre de tour : <span id="tour"></span></p>
+        <p>Nombre de point : <span  id="point"></span></p>
+        <p>Temps de jeu : <span  id="time"></span></p>
+    </div>
+    <button id="retour" onclick="retour()" >Retour</button>
+
+</body>
+</html>
+
+<script>
+
+
+    function retour() {
+
+        window.location.href = '../index.html';
+
+    }
+
+    function getScores() {
+    
+    
+        const myHeaders = new Headers();
+        const formdata = new FormData();
+    
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            body: formdata,
+            origin: 'file:///home/lienhart/Documents/MIND4/index.html',
+            redirect: "follow"
+        };
+    
+        fetch("http://localhost:8080/score", requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('tour').innerHTML = data.tour;
+                document.getElementById('point').innerHTML = data.point;
+                document.getElementById('time').innerHTML = data.time;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    
+    }
+    
+    </script>

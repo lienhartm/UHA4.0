@@ -1,0 +1,176 @@
+image: docker:24.0.0
+
+#services:
+#  - name: docker:dind
+#    command: ["--host=tcp://0.0.0.0:2375", "--insecure-registry=localhost:5000"]
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+  NODE_ENV: production
+
+stages:
+  - lint
+  - test
+  - publish
+  - deploy
+
+.test_script: &test_script
+  - cd blocnote-react/blocnote-server
+  - echo -e "\033[1;34m\n\n    ... Début Installation Test  ...\n\n\033[0m";
+  - cp ../.env .
+  - ls
+  - npm install
+  - echo -e "\033[1;34m\n\n    ... Test  ...\n\n\033[0m";
+  - npm test &
+  - echo -e "\033[1;34m\n\n    ... Fin Test  ...\n\n\033[0m";
+
+.lint_script: &lint_script
+  - cd blocnote-react/blocnote-client
+  - echo -e "\033[1;34m\n\n    ... Début Installation Analize & Linting  ...\n\n\033[0m";
+  - npm install
+  - echo -e "\033[1;34m\n\n    ... Analize & Linting front  ...\n\n\033[0m";
+  - npm run prettier &
+  - cd ../blocnote-server
+  - npm install
+  - echo -e "\033[1;34m\n\n    ... Analize & Linting back  ...\n\n\033[0m";
+  - npm run prettier & npm run eslint &
+  - echo -e "\033[1;34m\n\n    ... Analize & Linting mobile  ...\n\n\033[0m";
+  - cd ../../blocnote-mobile/blocnote
+  - npm install
+  - npm run prettier &
+  - echo -e "\033[1;34m\n\n    ... Fin Analize & Linting  ...\n\n\033[0m";
+
+.docker_script: &docker_script
+  - echo -e "\033[1;34m\n\n    ... Début Nettoyage Docker  ...\n\n\033[0m";
+  - docker compose down >/dev/null 2>&1 || true
+  - docker rm $(docker ps -aq) >/dev/null 2>&1 || true
+  - docker rmi $(docker images -q) >/dev/null 2>&1 || true
+  - docker volume rm $(docker volume ls -q) >/dev/null 2>&1 || true
+  - docker network prune -f >/dev/null 2>&1 || true
+  - docker builder prune -a -f >/dev/null 2>&1 || true
+  - echo -e "\033[1;34m\n\n    ... Fin Nettoyage Docker  ...\n\n\033[0m";
+
+.docker_hub: &docker_hub
+  - echo -e "\033[1;34m\n\n    ... Connection Docker Hub  ...\n\n\033[0m";
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin;
+  - echo -e "\033[1;34m\n\n    ... Docker Hub connecté  ...\n\n\033[0m";
+
+test-job:
+  stage: test
+  image: node:18
+  script:
+    - *test_script
+#  when: manual
+
+lint-job:
+  stage: lint
+  image: node:18
+  script:
+    - *lint_script
+#  when: manual
+
+publish-job:
+  stage: publish
+  image: docker:latest
+  only:
+    - develop
+  services:
+    - docker:dind
+  before_script:
+    - sleep 10
+    - docker info
+    - *docker_script
+    - *docker_hub
+  script:
+    - source ./.env
+    - echo -e "\033[1;34m\n\n    ... Buillding & Push Images Docker  ...\n\n\033[0m";
+    - cd blocnote-react
+    - echo -e "\033[1;34m\n\n    ... Build blocnote-react  ...\n\n\033[0m";
+    - docker compose build
+    - echo -e "\033[1;34m\n\n    ... Push Image blocnote-react's  ...\n\n\033[0m";
+    - docker push lienhartm/blocnote-react_client:latest
+    - docker push lienhartm/blocnote-react_server:latest
+    - cd ../blocnote-mobile
+    - echo -e "\033[1;34m\n\n    ... Build blocnote-mobile  ...\n\n\033[0m";
+    - docker compose build
+    - echo -e "\033[1;34m\n\n    ... Push Image blocnote-mobile  ...\n\n\033[0m";
+    - docker push lienhartm/blocnote-mobile:latest
+    - docker logout
+    - echo -e "\033[1;34m\n\n    ... Logout Docker Hub  ...\n\n\033[0m";
+    - docker image ls
+    - echo -e "\033[1;34m\n\n    ... Fin Building & Push  ...\n\n\033[0m";
+    - *docker_script
+  retry:
+    max: 2
+#  when: manual
+
+deploy-job:
+  stage: deploy
+  image: alpine
+  only:
+    - develop
+  before_script:
+    - *docker_script
+  script:
+    - source ./.env
+    - echo -e "\033[1;34m\n\n    ... Déploiement en cours ...\n\n\033[0m";
+    - echo -e "\033[1;34m\n\n    ... Installation des dépendances ...\n\n\033[0m";
+    - apk update;
+    - apk add --no-cache openssh-client sshpass;
+    - echo -e "\033[1;34m\n\n    ... Connection SSH au Server ...\n\n\033[0m";
+    - sshpass -p "uha40" ssh -v -o StrictHostKeyChecking=no uha40@10.8.26.4 '
+        
+        echo -e "\033[1;34m\n\n    ... Arrêt des conteneurs ...\n\n\033[0m";
+        echo -e "\033[1;34m\n\n - Liste des conteneurs :\n\n\033[0m";
+        sudo docker ps;
+        echo -e "\033[1;34m\n\n - Conteneurs arrêtés :\n\n\033[0m";
+        sudo docker stop lienhartm-blocnote.react.client;
+        sudo docker stop lienhartm-blocnote.react.server;
+        sudo docker stop lienhartm-blocnote.mobile;
+        sleep 30;
+        
+        echo -e "\033[1;34m\n\n    ... Suppression des conteneurs ...\n\n\033[0m";
+        echo -e "\033[1;34m\n\n - Liste des conteneurs arrêtés :\n\n\033[0m";
+        sudo docker ps -a;
+        echo -e "\033[1;34m\n\n - Conteneurs supprimés :\n\n\033[0m";
+        sudo docker rm -f lienhartm-blocnote.react.client;
+        sudo docker rm -f lienhartm-blocnote.react.server;
+        sudo docker rm -f lienhartm-blocnote.mobile;
+        sleep 30;
+
+        echo -e "\033[1;34m\n\n    ... Suppression des images ...\n\n\033[0m";
+        echo -e "\033[1;34m\n\n - Liste des images :\n\n\033[0m";
+        sudo docker images;
+        echo -e "\033[1;34m\n\n - Images supprimées :\n\n\033[0m";
+        sudo docker rmi -f lienhartm/blocnote-react_client:latest;
+        sudo docker rmi -f lienhartm/blocnote-react_server:latest;
+        sudo docker rmi -f lienhartm/blocnote-mobile:latest;
+        sleep 30;
+        
+        echo -e "\033[1;34m\n\n    ... Connexion à Docker ...\n\n\033[0m" &&
+        export DOCKER_PASSWORD="Avitarelle2025!" &&
+        export DOCKER_USER="lienhartm" &&
+        echo "$DOCKER_PASSWORD" | sudo -S docker login --username "$DOCKER_USER" --password-stdin &&
+
+        echo -e "\033[1;34m\n\n    ... Pulling des images ...\n\n\033[0m" &&
+        sudo docker pull lienhartm/blocnote-react_client:latest &&
+        sudo docker pull lienhartm/blocnote-react_server:latest &&
+        sudo docker pull lienhartm/blocnote-mobile:latest &&
+
+        echo -e "\033[1;34m\n\n - Démarrage des conteneurs :\n\n\033[0m" &&
+        sudo docker run -d -p 3000:3000 --name lienhartm-blocnote.react.client lienhartm/blocnote-react_client:latest &&
+        sudo docker run -d -p 4000:4000 --name lienhartm-blocnote.react.server lienhartm/blocnote-react_server:latest &&
+        sudo docker run -d -p 8081:8081 --name lienhartm-blocnote.mobile lienhartm/blocnote-mobile:latest &&
+        
+        echo -e "\033[1;34m\n\n - Liste des conteneurs actifs :\n\n\033[0m" &&
+        sudo docker ps &&
+        sudo docker logout
+        '
+    - echo -e "\033[1;34m\n\n    ... Fin Pulling & Running dans le server ...\n\n\033[0m";
+  retry:
+    max: 2
+#  when: manual
+
+

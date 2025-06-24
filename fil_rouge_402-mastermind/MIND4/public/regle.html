@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	    body {
+            display: flex;
+            justify-content: center; /* Centrer horizontalement */
+            align-items: center; /* Centrer verticalement */
+            height: 100vh; /* 100% de la hauteur de la fenêtre */
+            margin: 0; /* Supprimer les marges par défaut */
+        }
+        #regle {
+            text-align: center; /* Centrer le texte horizontalement */
+        }
+        #retour {
+            width: 100px;
+            height: 60px;
+            margin: 5px;
+            font-size: 20px;
+            background-color: green;
+            color: white;
+            position: fixed; /* Positionnement fixe */
+            bottom: 0; /* En bas */
+            left: 50%; /* À mi-chemin horizontalement */
+            transform: translateX(-50%); /* Déplacer de moitié de la largeur du bouton vers la gauche */
+        }
+</style>
+</head>
+<body>
+	<div id="regle">
+		<h1>MIND</h1>
+		<div style="width: 400px;">
+			<h2>
+				Règles du jeu
+			</h2>
+			<h3>MIND est un jeu dérivée du MASTERMIND</h3>
+			<br />
+			<div>
+				<h3>Le but est de découvrir la combinaison de couleurs/chiffre/forme coloré cachée par l'ordinateur. Pour cela, vous devez faire plusieurs essais pour choisir au fur et à mesure les bonnes couleurs/chiffres/formes colorées et trouver leur place. L'ordinateur vous donnera des indices pour savoir si vous mettez les bonnes couleurs/chiffres/formes colorées et si elles sont à la bonne place.</h3>
+				<br>
+				<ul>
+					<li> (-) / 
+						<span style='color:white;'>⦁</span>
+						 - Pas dans la combinaison
+					</li>
+					<li> (+) / 
+						<span style='color:red;'>⦁</span>
+						 - Dans la combinaison mais pas à la bonne place
+					</li>
+					<li> (o) / 
+						<span style='color:black;'>⦁</span>
+						 - Dans la combinaison et à la bonne place
+					</li>
+				</ul>
+			</div>
+		</div>
+		<button id="retour" onclick="retour()" >Retour</button>
+	</div>
+</body>
+</html>
+
+<script>
+
+
+	function retour() {
+
+		window.location.href = '../index.html';
+
+	}
+
+</script>

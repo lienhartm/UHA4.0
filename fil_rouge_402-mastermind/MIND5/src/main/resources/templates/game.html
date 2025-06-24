@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Mind</title>
+	    <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
+	    <script th:src="@{/js/script.js}"></script>
+	</head>
+	<body>
+
+		<div style="display: flex; flex-direction: row; justify-content:center; ">
+            <a th:href="@{/gamessd}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Jouer sans doublons</a>
+            <a th:href="@{/gamesad}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Jouer avec doublons</a>
+            <a th:href="@{/regle}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Règle du jeu</a>
+            <a th:href="@{/score}" style="height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;">Meilleur scores</a>
+        </div>
+        
+        <br>
+        
+        <div th:style="'position:relative;top:200px;font-size:48px;font-weight:bold;text-align:center;'">
+    		<p style="text-align:center;">YOU WIN!</p>
+    	 	<h3><a th:href="@{/}" style="text-decoration:none;background:brown;color:white;padding:10px;border-radius:10px;">Try again!</a></h3>
+        </div>
+        
+	</body>
+</html>
+
+<script>
+
+var no = 400;var delai = 10;
+var dx = new Array(), xp = new Array(), yp = new Array();
+var am = new Array(), stx = new Array(), sty = new Array();
+var i;
+larg_fenetre = (document.body.offsetWidth<window.innerWidth)? window.innerWidth:document.body.offsetWidth;
+haut_fenetre = (document.body.offsetHeight<window.innerHeight)? window.innerHeight:document.body.offsetHeight;
+
+for (i = 0; i < no; i++) { 
+    dx[i] = 0;
+    xp[i] = Math.random()*(larg_fenetre-40);
+    yp[i] = Math.random()*haut_fenetre;
+    am[i] = Math.random()*20;
+    stx[i] = 0.02 + Math.random()/10;
+    sty[i] = 0.7 + Math.random();
+    j = Math.round(Math.random()*11)+1;
+    
+    obj = document.getElementsByTagName('body')[0];
+    para = document.createElement("span");
+    para.setAttribute("id","dot" + i);
+    para.style.position = "absolute";
+    para.style.zIndex = "2";
+    switch(j) {
+    	case 1:
+    		para.innerHTML = "■";
+    		para.style.color = "red";
+    		break;
+    	case 2:
+    		para.innerHTML = "■";
+    		para.style.color = "yellow";
+    		break;
+    	case 3:
+    		para.innerHTML = "■";
+    		para.style.color = "blue";
+    		break;
+    	case 4:
+    		para.innerHTML = "●";
+    		para.style.color = "red"; 
+    		break;
+    	case 5:
+    		para.innerHTML = "●";
+      		para.style.color = "yellow";
+    		break;
+    	case 6:
+    		para.innerHTML = "●";
+    		para.style.color = "blue";
+    		break;
+    	case 7:
+    		para.innerHTML = "▲";
+    		para.style.color = "red";
+    		break;
+    	case 8:
+    		para.innerHTML = "▲";
+    		para.style.color = "yellow";
+    		break;
+    	case 9:
+    		para.innerHTML = "▲";
+    		para.style.color = "blue";
+    		break;
+    	case 10:
+    		para.innerHTML = "⦁";
+    		para.style.color = "red";
+    		break;
+    	case 11:
+    		para.innerHTML = "⦁";
+    		para.style.color = "yellow";
+    		break;
+    	case 12:
+    		para.innerHTML = "⦁";
+    		para.style.color = "blue";
+    		break;
+    }   
+    //⦁
+    //para.setAttribute("src","images/neige.gif");
+    obj.appendChild(para);
+                               
+}
+
+
+function neige() {
+    for (i = 0; i < no; i++) {
+        dx[i] += stx[i];
+        yp[i] += sty[i];
+        if (yp[i] > haut_fenetre-50) {
+            xp[i] = Math.random()*(larg_fenetre-am[i]-40);
+            yp[i] = 0;
+        }
+        document.getElementById("dot"+i).style.top = yp[i] + "px";
+        document.getElementById("dot"+i).style.left = xp[i] + am[i]*Math.sin(dx[i]) + "px";
+        
+    }
+    setTimeout("neige()", delai);
+}
+
+neige();
+
+
+
+</script>

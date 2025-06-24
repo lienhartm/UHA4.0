@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Mind</title>
+	    <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
+	    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+	</head>
+	<body>
+	
+			<!-- 
+		<p th:text="${#ctx.session.sessionId}"></p>
+		<p th:text="${#ctx.session.codeComputer}"></p>
+		<p th:text="${#ctx.session.listGameData}"></p>
+		<br>
+		 -->
+
+		<div th:style="'display: flex; flex-direction: row; justify-content:center;'">
+            <a th:href="@{/gamessd}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer sans doublons</a>
+            <a th:href="@{/gamesad}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Jouer avec doublons</a>
+            <a th:href="@{/regle}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Règle du jeu</a>
+            <a th:href="@{/score}" th:style="'height: 50px; width: 200px;text-decoration: none;color:black; border: 1px solid black; display: inline-block; text-align: center; line-height: 50px;'">Meilleur scores</a>
+        </div>
+
+        <canvas id="myCanvas" width="800" height="1000" th:style="'position:relative; left:41%;top: 50px;'"></canvas>
+    
+		<div th:style="'position:absolute; bottom: 220px; left:20%;'">
+		    <div id="affichage" th:style="'width: 180px;height: 40px;border: 1px solid #ccc;text-align: center;margin: 10px; padding:10px;'"></div>
+		    <button th:onclick="ajouterChiffre(1)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;'">●</button>
+		    <button th:onclick="ajouterChiffre(2)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;'">●</button>
+		    <button th:onclick="ajouterChiffre(3)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;'">●</button><br>
+		    <button th:onclick="ajouterChiffre(4)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;'">■</button>
+		    <button th:onclick="ajouterChiffre(5)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;'">■</button>
+		    <button th:onclick="ajouterChiffre(6)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;'">■</button><br>
+		    <button th:onclick="ajouterChiffre(7)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;'">▲</button>
+		    <button th:onclick="ajouterChiffre(8)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;'">▲</button>
+		    <button th:onclick="ajouterChiffre(9)" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;'">▲</button>
+		    <form action="/gamessd" method="post" name="code">
+		    	<input type="submit" id="valider" th:style="'visibility:hidden;width: 135px;height: 60px;margin: 5px;font-size: 20px;background-color: green;color: white;'">
+		    	<input type="text" value="" id="code" name="code" th:style="'visibility:hidden;'" required>
+		    </form>
+		    <button th:onclick="reset()" th:style="'width: 60px;height: 60px;margin: 5px;font-size: 20px;background-color:red;color:white;position:relative;left:150px;bottom:70px;'">Reset</button>
+		</div>
+
+	</body>
+</html>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+	var ol = "";
+     var code = '';
+     var affichageDiv = document.getElementById('affichage');
+     var inputSubmit = document.getElementById('code');
+     var buttonValid = document.getElementById('valider');
+     var gamePlate = document.getElementById('gamePlate');
+     var clavier = document.getElementById('clavier');
+    
+     function ajouterChiffre(chiffre) {
+         if (code.length < 4) {
+             code += chiffre;
+             affichageDiv.innerHTML += getSymbole(chiffre);
+             inputSubmit.value = code;
+         }
+         if (code.length >= 4) { buttonValid.style.visibility='visible'; }
+     }
+     
+     if (listing.length >= 10) {
+    	 clavier.style.visibility='hidden';
+     }
+     
+     function reset() {
+         code = '';
+         affichageDiv.innerHTML = '';
+         inputSubmit.value = '';
+     }
+     
+     
+     
+     var canvas = document.getElementById('myCanvas');
+     var context = canvas.getContext('2d');
+
+     var radius = 10;
+     var halfWidth = 10;
+     var halfHeight = 10;
+     var triangleHeight = 20;
+     var triangleBase = 20;
+
+     var x = 50;
+     var y = 50;
+     var xx = 0;
+     
+     var listing = /*[[${listing}]]*/ [];
+
+     
+	if(listing != null) {
+	     console.log(listing);
+	}
+     
+     if(listing != null) {
+	     for (let data of listing) {
+	         var joueurCode = data.joueurCode;
+	         var correction = data.correction;
+			 y += 30;
+			 x = 50;
+			 xx = 200;
+	         for (let code of joueurCode) {
+	        	 x += 30;
+	             drawShape(parseInt(code));
+	         }
+	         for (let corre of correction) {
+	        	 xx += 30;
+	             drawCorrection(corre);
+	         }
+	     }
+     }
+
+     function drawShape(code) {
+         switch (code) {
+             case 1: // Red circle
+                 drawCircle(x, y, radius, 'red');
+                 break;
+             case 2: // Green circle
+                 drawCircle(x, y, radius, 'green');
+                 break;
+             case 3: // Blue circle
+                 drawCircle(x, y, radius, 'blue');
+                 break;
+             case 4: // Red square
+                 drawSquare(x, y, halfWidth, halfHeight, 'red');
+                 break;
+             case 5: // Green square
+                 drawSquare(x, y, halfWidth, halfHeight, 'green');
+                 break;
+             case 6: // Blue square
+                 drawSquare(x, y, halfWidth, halfHeight, 'blue');
+                 break;
+             case 7: // Red triangle
+                 drawTriangle(x, y-25, triangleHeight, triangleBase, 'red');
+                 break;
+             case 8: // Green triangle
+                 drawTriangle(x, y-25, triangleHeight, triangleBase, 'green');
+                 break;
+             case 9: // Blue triangle
+                 drawTriangle(x, y-25, triangleHeight, triangleBase, 'blue');
+                 break;
+         }
+     }
+
+     function drawCorrection(code) {
+         switch(code) {
+         case 'o':
+        	 drawLosange(xx, y, halfWidth, halfHeight, 'red');
+        	 break;
+         case '+':
+        	 drawLosange(xx, y, halfWidth, halfHeight, 'black');
+        	 break;
+         case '-':
+        	 drawLosange(xx, y, halfWidth, halfHeight, 'gray');
+        	 break;
+         }
+     }
+
+     function drawCircle(x, y, radius, color) {
+         context.beginPath();
+         context.arc(x, y, radius, 0, 2 * Math.PI);
+         context.fillStyle = color;
+         context.fill();
+     }
+
+     function drawSquare(x, y, halfWidth, halfHeight, color) {
+         context.beginPath();
+         context.rect(x - halfWidth, y - halfHeight, 2 * halfWidth, 2 * halfHeight);
+         context.fillStyle = color;
+         context.fill();
+     }
+
+     function drawTriangle(x, y, height, base, color) {
+         context.beginPath();
+         context.moveTo(x, y);
+         context.lineTo(x + base / 2, y + height);
+         context.lineTo(x - base / 2, y + height);
+         context.closePath();
+         context.fillStyle = color;
+         context.fill();
+     }
+     
+     function drawLosange(x, y, halfWidth, halfHeight, color) {
+	   	context.beginPath();
+ 	    context.moveTo(x, y - halfHeight);
+ 	    context.lineTo(x + halfWidth, y);
+ 	    context.lineTo(x, y + halfHeight);
+ 	    context.lineTo(x - halfWidth, y);
+ 	    context.closePath();
+ 	    context.fillStyle = color;
+ 	    context.fill();
+     }
+
+/*]]>*/
+</script>

@@ -1,0 +1,345 @@
+/* style.css */
+/**/
+/* header */
+/**/
+header {
+    font-size: 48px;
+    padding: 50px 100px 5px 50px;
+    background-color: #333;
+    color: #fff;
+    }
+/**/
+/* title */
+/**/
+.titre {
+    background-color: chocolate;
+    font-weight: 600;
+    width: 600px;
+    padding: 10px;
+    border-radius: 15px 50px 50px 15px;
+    font-size: 76px;
+    text-align: left;
+    animation: titre;
+    animation-fill-mode: forwards;
+    animation-duration: 5s;
+    }
+@keyframes titre {
+        from {width:600px;}
+        to {width:1600px;}
+    }
+.titre::after {
+    content: "\1F3C0";
+    vertical-align: sup;
+    animation: ball;
+    animation-fill-mode: forwards;
+    animation-duration: 10s;
+    position: relative;
+    font-size: 76px;
+}
+@keyframes ball {
+    from {left:0px;}
+    to {left:1000px;}
+}
+i.fa-basketball-ball {
+    font-size:200px;
+    background-color:black;
+    color: chocolate;
+    border-radius:100px 100px 100px 100px;
+    vertical-align: text-bottom;
+    z-index: -1;
+    }
+/**/
+/* navigation */
+/**/
+nav {
+    font-size: 24px;
+    padding: 10px 10px 10px 10px;
+    background-color: #333;
+    }
+.nav {
+    text-decoration: none;
+    padding: 10px 10px 10px 10px;
+    color: #fff;
+    border: 5px solid #333;
+    }
+.nav:hover {
+    border-bottom: 5px solid #fff;
+    }
+/**/
+/* main */
+/**/
+main {
+    margin-bottom: 100px;
+    }
+img {
+    width: 200px;
+    height: 200px;
+    }
+.bold {
+    font-weight: 600;
+}
+.shadow {
+  box-shadow: 5px 5px 5px lightgrey;
+  transition: 0.7s ease;
+}
+.shadow:hover {
+    box-shadow: 10px 10px 5px 10px lightgrey;
+    transform: scale(1.1);
+}
+.padding:hover {
+    padding: 2px 100px 2px 100px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    transition: 0.5s ease;
+}
+section.list_joueurs a, section.list_equipes a {
+    text-decoration: none;
+    color: black;
+    }
+
+    a.link {
+        text-decoration: none;
+        color: #000;
+    }
+    a.link:hover {
+        text-decoration: underline;
+        color: #000;
+    }
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+/**/
+/* footer */
+/**/
+footer {
+    text-align: center;
+    padding: 50px 100px 50px 50px;
+    margin-top: -5px;
+    background-color: #333;
+    color: #fff;
+    }
+.footer {
+    color: #fff;
+}
+.footer:hover {
+    text-decoration: underline;
+}
+.info-line {
+    margin-top: 100px;
+}
+.info {
+    color:gray;
+    }
+.info:hover {
+    color:gray;
+    background-color: #333;
+    text-decoration: underline;
+    }
+/**/
+/* page index */
+/**/
+.page_index {
+    text-align: center;
+    width: 500px;
+    border-radius: 15px 50px;
+    padding: 50px;
+    background-color: rgba(255, 0, 0, 30%);
+    }
+.index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    flex-direction: column;
+    }
+.submit {
+    text-align: center;
+}
+/**/
+/* page list equipe */
+/**/
+.list_equipes {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    }
+h1.list_equipes {
+    margin-top: 100px;
+    text-align: center;
+}
+
+figure.list  {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    }
+/**/
+/* page detail equipe */
+/**/
+.detail_equipe {
+    display: grid;
+    gap: 50px;
+    padding: 10px;
+    }
+figure.detail_equipe {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+    display: inline-flex;
+    justify-content: space-around;
+}
+figcaption.detail_equipe {
+    font-size: 48px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+h2.enum_joueur {
+    text-align: center;
+}
+div.enum_joueur {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto auto auto;
+}
+.enum_joueur {
+    grid-column: 4 / span 2;
+    grid-row: 2;
+}
+h2.description_equipe {
+    text-align: center;
+}
+.description_equipe {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+}
+
+.BostonCeltics {
+    margin-top: 100px;
+    width: auto;
+    height: 200px;
+    text-align: left;
+    background-color: #008040;
+    color: #fff;
+}
+.CharlotteHornets {
+    margin-top: 100px;
+    width: auto;
+    height: 200px;
+    text-align: left;
+    background-color: #00778c;
+    color: #fff;
+}
+.ChicagoBulls {
+    margin-top: 100px;
+    width: auto;
+    height: 200px;
+    text-align: left;
+    background-color: #c41e3a;
+    color: #fff;
+}
+.DallasMavericks {
+    margin-top: 100px;
+    width: auto;
+    height: 200px;
+    text-align: left;
+    background-color: #106bbA;
+    color: #fff;
+}
+.MiamiHeat {
+    margin-top: 100px;
+    width: auto;
+    height: 200px;
+    text-align: left;
+    background-color: #98002e;
+    color: #fff;
+}
+.NewOrleansPelicans {
+    margin-top: 100px;
+    width: auto;
+    height: 200px;
+    text-align: left;
+    background-color: #200b5c;
+    color: #fff;
+}
+/**/
+/* page list joueur */
+/**/
+
+.list_joueurs {
+    margin-top: 100px;
+    text-align: center;
+    color:#000;
+    }
+h1.list_joueurs {
+    margin-top: 100px;
+    text-align: center;
+}
+hr {
+    width: 250px;
+    margin-bottom: 50px;
+    }
+a {
+    text-decoration: none;
+    color: black;
+    }
+/**/
+/* page detail joueur */
+/**/
+.detail_joueur {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    padding: 10px;
+
+}
+div.section_joueur {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+}
+figure.figure_joueur {
+    height: 500px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    margin: auto;
+  }
+  img.figure_joueur {
+    margin:auto;
+  }
+
+figcaption.figure_joueur {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin: auto;
+}
+article.article_joueur {
+    padding: 50px;
+    margin: auto;
+    text-align: left;
+}
+h2.nom_joueur {
+    margin: 0 0 50px 0;
+}
+/**/
+/* form */
+/**/
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form {
+    padding: 50px;
+    width: 400px;
+}
+label {
+    padding-top: 20px;
+}

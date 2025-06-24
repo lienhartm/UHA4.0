@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="mind" onchange="get()"></div>
+
+        <div style="position:absolute; bottom: 120px; left:40%;">
+            <div id="affichage" style="width: 200px;height: 30px;text-align: center;margin-bottom: 10px;"></div>
+            <button onclick="ajouterChiffre(1)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;">&#9679;</button>
+            <button onclick="ajouterChiffre(2)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;">&#9679;</button>
+            <button onclick="ajouterChiffre(3)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;">&#9679;</button><br>
+            <button onclick="ajouterChiffre(4)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;">&#9632;</button>
+            <button onclick="ajouterChiffre(5)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;">&#9632;</button>
+            <button onclick="ajouterChiffre(6)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;">&#9632;</button><br>
+            <button onclick="ajouterChiffre(7)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:red;">&#9650;</button>
+            <button onclick="ajouterChiffre(8)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:green;">&#9650;</button>
+            <button onclick="ajouterChiffre(9)" style="width: 60px;height: 60px;margin: 5px;font-size: 20px;color:blue;">&#9650;</button><br>
+            <button id="reset" onclick="reset()" style="width: 100px;height: 60px;margin: 5px;font-size: 20px;background-color:red;color:white;">Reset</button>
+            <button id="valider" onclick="valider()" style="width: 100px;height: 60px;margin: 5px;font-size: 20px;background-color: green;color: white;">Valider</button>
+            <button id="retour" onclick="retour()" style="width: 100px;height: 60px;margin: 5px;font-size: 20px;background-color: yellow;color: white;">Retour</button>
+        </div>        
+    </body>
+</html>
+<script>
+
+    function retour() {
+
+        window.location.href = '../index.html';
+
+    }
+
+    function reset() {
+        code = '';
+        affichageDiv.innerHTML = '';
+    }
+
+    function valider() {
+        if (code.length === 4) {
+            
+        }}
+
+    function getSymbole(chiffre) {
+        switch (chiffre) {
+            case 1:
+                return '<span style="font-size: 30px;color:red;">&#9679;</span>';
+            case 2:
+                return '<span style="font-size: 30px;color:green;">&#9679;</span>';
+            case 3:
+                return '<span style="font-size: 30px;color:blue;">&#9679;</span>';
+            case 4:
+                return '<span style="font-size: 30px;color:red;">&#9632;</span>';
+            case 5:
+                return '<span style="font-size: 30px;color:green;">&#9632;</span>';
+            case 6:
+                return '<span style="font-size: 30px;color:blue;">&#9632;</span>';
+            case 7:
+                return '<span style="font-size: 30px;color:red;">&#9650;</span>';
+            case 8:
+                return '<span style="font-size: 30px;color:green;">&#9650;</span>';
+            case 9:
+                return '<span style="font-size: 30px;color:blue;">&#9650;</span>';
+            default:
+                return '';
+        }
+    }
+
+</script>
+

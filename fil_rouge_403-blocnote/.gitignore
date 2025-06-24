@@ -1,0 +1,16 @@
+node_modules/
+blocnote-documentation-swagger/
+blocnote-test/
+
+blocnote-documentation-swagger/
+blocnote-test/
+Ressources/*
+!Ressources/Diagramme/
+!Ressources/Diagramme/**
+!*.env
+blocnote-react/blocnote-client/node_modules/
+blocnote-react/blocnote-server/node_modules/
+
+blocnote-react/blocnote-client/node_modules/
+blocnote-react/blocnote-server/node_modules/
+

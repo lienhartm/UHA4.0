@@ -1,0 +1,10 @@
+services:
+  client:
+    build: ./blocnote
+    image: lienhartm/blocnote-mobile:latest
+    container_name: lienhartm-blocnote.mobile
+    env_file:
+      - .env
+    ports:
+      - 8081
+

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "7000:8080"  # Port utilisé pour accéder à l'application depuis l'hôte
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod  # Définition du profil Spring actif à 'prod'
+    volumes:
+      - ./src/main/resources/application.properties:/app/src/main/resources/application.properties  # Montage du fichier de propriétés d'application dans le conteneur
+    networks:
+      - backend  # Liaison du service à un réseau nommé 'backend'
+
+networks:
+  backend:
+    driver: bridge  # Configuration du pilote réseau pour le réseau 'backend'
